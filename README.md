@@ -79,9 +79,9 @@ Also it will only generate the specified `ProjectReference` and none of it's dep
 
 ### Example
 
-For a `MyInpc` type that implements `INotifyPropertyChanged` included in the `PackageReference` criteria etc. as above, an extension method that exposes an accessor to an `Observable<PropertyChangedEventArgs>` of the triggered events, will be automatically generated, and called `Events()`.
+If one of the packages included in the `PackageReference`s (eligible for event generation as explained above) exposes a type `MyInpc` that exposes a `PropertyChanged` event (of type (e.g. `INotifyPropertyChanged`), an extension method that exposes an accessor to an `Observable<PropertyChangedEventArgs>` of the triggered events, will be automatically generated in a wrapper class, and be called `Events()`.
 
-Here's how it can be utilized: 
+Here's how it can be utilized:
 
 ```c#
 INotifyPropertyChanged myInpc = new MyInpc();
@@ -89,7 +89,7 @@ Observable<PropertyChangedEventArgs> propertyChangedObservable = myInpc
     .Events()
     .PropertyChanged;
     
-Or
+// or in short
 myInpc
     .Events()
     .PropertyChanged    
